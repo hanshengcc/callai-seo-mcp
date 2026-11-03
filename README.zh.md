@@ -1,7 +1,7 @@
 # CallAI（青柠AI）—— 给 AI Agent 的实时 SEO 数据
 
-[![npm](https://img.shields.io/npm/v/@callai/seo?logo=npm&color=cb3837)](https://www.npmjs.com/package/@callai/seo)
-[![license](https://img.shields.io/npm/l/@callai/seo?color=blue)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@callaiapi/seo?logo=npm&color=cb3837)](https://www.npmjs.com/package/@callaiapi/seo)
+[![license](https://img.shields.io/npm/l/@callaiapi/seo?color=blue)](./LICENSE)
 
 [English](./README.md)
 
@@ -9,7 +9,7 @@
 
 两种用法：
 
-- **DeepSeek Harness（dsh）插件**：就是这个 npm 包 `@callai/seo`。装好后 Agent 会获得这些工具，以及一个 `callai-seo` skill，教它怎么做关键词调研、竞品分析、GEO 检查和页面体检。
+- **DeepSeek Harness（dsh）插件**：就是这个 npm 包 `@callaiapi/seo`。装好后 Agent 会获得这些工具，以及一个 `callai-seo` skill，教它怎么做关键词调研、竞品分析、GEO 检查和页面体检。
 - **远程 MCP 服务器**：`https://api.callaiapi.com/mcp`，可用于 Claude Code、Cursor、VS Code、Cline、Windsurf 等任何 MCP 客户端，无需安装。
 
 数据来自 [DataForSEO](https://dataforseo.com/)。按次从你的青柠AI 余额扣费：$1 起充，无月费，余额不过期。每次工具结果都会写明本次花费。
@@ -41,10 +41,10 @@
 需要 dsh 0.2.0 或更高版本。
 
 ```sh
-dsh plugin --profile web add @callai/seo
+dsh plugin --profile web add @callaiapi/seo
 ```
 
-如果你用的不是 `web` profile，换成自己的名字（`ls ~/.dsh/profiles` 可以查看）。也可以在 dsh-plugin-shop 等插件商店里搜索 **@callai/seo** 安装。装完要重启 dsh，正在运行的进程不会加载新插件。
+如果你用的不是 `web` profile，换成自己的名字（`ls ~/.dsh/profiles` 可以查看）。也可以在 dsh-plugin-shop 等插件商店里搜索 **@callaiapi/seo** 安装。装完要重启 dsh，正在运行的进程不会加载新插件。
 
 ### 填入密钥
 
@@ -87,7 +87,7 @@ CALLAI_API_KEY=sk-live-你的密钥
 ### 卸载
 
 ```sh
-dsh plugin --profile web remove @callai/seo
+dsh plugin --profile web remove @callaiapi/seo
 ```
 
 ## 3. 在其他 MCP 客户端中使用

@@ -1,7 +1,7 @@
 # CallAI — live SEO data for AI agents
 
-[![npm](https://img.shields.io/npm/v/@callai/seo?logo=npm&color=cb3837)](https://www.npmjs.com/package/@callai/seo)
-[![license](https://img.shields.io/npm/l/@callai/seo?color=blue)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@callaiapi/seo?logo=npm&color=cb3837)](https://www.npmjs.com/package/@callaiapi/seo)
+[![license](https://img.shields.io/npm/l/@callaiapi/seo?color=blue)](./LICENSE)
 
 [中文说明](./README.zh.md)
 
@@ -9,7 +9,7 @@ CallAI gives your AI agent real search data instead of guesses: live Google and 
 
 It works two ways:
 
-- **DeepSeek Harness (dsh) plugin** — this npm package, `@callai/seo`. Installs the tools plus a `callai-seo` skill that teaches the agent how to do keyword research, competitor analysis, GEO checks and audits.
+- **DeepSeek Harness (dsh) plugin** — this npm package, `@callaiapi/seo`. Installs the tools plus a `callai-seo` skill that teaches the agent how to do keyword research, competitor analysis, GEO checks and audits.
 - **Remote MCP server** — `https://api.callaiapi.com/mcp`, for Claude Code, Cursor, VS Code, Cline, Windsurf and any other MCP client. Nothing to install.
 
 Data comes from [DataForSEO](https://dataforseo.com/). You pay per call from your CallAI balance: top up from $1, no subscription, balance never expires. Every tool result states what that call cost.
@@ -41,10 +41,10 @@ Data comes from [DataForSEO](https://dataforseo.com/). You pay per call from you
 Requires dsh 0.2.0 or later.
 
 ```sh
-dsh plugin --profile web add @callai/seo
+dsh plugin --profile web add @callaiapi/seo
 ```
 
-Use your own profile name instead of `web` if you run another one (`ls ~/.dsh/profiles`). You can also install **@callai/seo** from a plugin shop such as dsh-plugin-shop. Restart dsh afterwards — a newly added plugin is not loaded into a running process.
+Use your own profile name instead of `web` if you run another one (`ls ~/.dsh/profiles`). You can also install **@callaiapi/seo** from a plugin shop such as dsh-plugin-shop. Restart dsh afterwards — a newly added plugin is not loaded into a running process.
 
 ### Give the plugin your key
 
@@ -87,7 +87,7 @@ Start a session and ask *"Which mcp__callai tools do you have?"* — the agent s
 ### Uninstall
 
 ```sh
-dsh plugin --profile web remove @callai/seo
+dsh plugin --profile web remove @callaiapi/seo
 ```
 
 ## 3. Use it in other MCP clients

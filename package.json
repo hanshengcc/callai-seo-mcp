@@ -1,5 +1,5 @@
 {
-  "name": "@callai/seo",
+  "name": "@callaiapi/seo",
   "version": "0.1.0",
   "description": "CallAI for DeepSeek Harness: live SEO data for your agent — Google/Bing SERP with AI Overview sources, keyword volume and difficulty, competitor gaps, backlinks and page audits. Pay as you go.",
   "keywords": [
