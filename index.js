@@ -10,7 +10,7 @@ import * as McpClient from '@deepseek-ai/dsh-mcp-client'
 
 export const name = 'callai-seo'
 
-/** The MCP client registers its tools in the tool registry. */
+/** The MCP client registers its tools in the tool registry. Credentials are optional (headless profiles disable them). */
 export const inject = ['tools']
 
 const SERVER_NAME = 'callai'
@@ -46,29 +46,65 @@ const skillProvider = {
   },
 }
 
-function connectionConfig(config) {
-  const apiKey = config.apiKey?.trim()
+function connectionConfig(config, apiKey) {
   return McpClient.Config({
     serverName: SERVER_NAME,
     transport: 'streamable-http',
     url: config.url || DEFAULT_URL,
-    headers: { Authorization: `Bearer ${apiKey || `\${credential:${CREDENTIAL_REF}}`}` },
-    expandTemplates: !apiKey,
+    headers: { Authorization: `Bearer ${apiKey}` },
     toolCallTimeoutMs: config.toolCallTimeoutMs,
   })
 }
 
-export function apply(ctx, config) {
+async function resolveKey(ctx, config) {
+  const fromConfig = config.apiKey?.trim()
+  if (fromConfig) return fromConfig
+  const credentials = ctx.get('credentials')
+  const resolved = credentials ? await credentials.resolve(CREDENTIAL_REF).catch(() => undefined) : undefined
+  return resolved?.value || process.env[CREDENTIAL_REF]?.trim() || undefined
+}
+
+/**
+ * Resolves the key (plugin setting, else the CALLAI_API_KEY credential, else the CALLAI_API_KEY
+ * environment variable) and mounts the MCP client with it. Released dsh-mcp-client versions do not
+ * expand ${credential:…} templates, so the key is resolved here. Waits for the first connection so
+ * the tools exist before the first turn; reconnects when the credentials provider appears or the
+ * credential changes.
+ */
+export async function apply(ctx, config) {
   ctx.inject(['skills'], (scope) => {
     scope.skills.registerProvider(() => skillProvider)
   })
-  const connection = connectionConfig(config)
-  if (config.apiKey?.trim()) {
-    ctx.plugin(McpClient, connection)
-    return
+
+  let child
+  let connectedKey
+  let generation = 0
+  let warned = false
+  const connect = async () => {
+    const current = ++generation
+    const apiKey = await resolveKey(ctx, config)
+    if (current !== generation || apiKey === connectedKey) return
+    if (child) await child.dispose()
+    child = undefined
+    connectedKey = apiKey
+    if (!apiKey) {
+      if (!warned) console.warn(`[callai-seo] No API key: set apiKey in the plugin settings, save the ${CREDENTIAL_REF} credential or export ${CREDENTIAL_REF}. Get a key at https://callaiapi.com/portal?tab=keys`)
+      warned = true
+      return
+    }
+    child = ctx.plugin(McpClient, connectionConfig(config, apiKey))
+    await child.await().catch((err) => {
+      console.warn('[callai-seo] MCP connection failed:', err instanceof Error ? err.message : err)
+    })
   }
-  // The client resolves ${credential:…} through ctx.credentials, which must exist when it starts.
-  ctx.inject(['credentials'], (scope) => {
-    scope.plugin(McpClient, connection)
-  })
+
+  if (!config.apiKey?.trim()) {
+    ctx.inject(['credentials'], () => {
+      void connect()
+    })
+    ctx.on('credentials/reference-updated', (ref) => {
+      if (ref === CREDENTIAL_REF) void connect()
+    })
+  }
+  await connect()
 }

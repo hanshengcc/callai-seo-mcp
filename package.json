@@ -1,6 +1,6 @@
 {
   "name": "dsh-callai-seo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Live SEO data in DeepSeek Harness: Google/Bing SERP, keyword volume and difficulty, competitor gaps, backlinks and on-page audits via the CallAI MCP server. Pay as you go.",
   "keywords": [
     "dsh-plugin",
