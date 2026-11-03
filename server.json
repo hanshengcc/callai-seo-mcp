@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.callaiapi/seo",
+  "title": "CallAI SEO",
+  "description": "Live SEO data: Google/Bing SERP, AI Overview sources, keyword difficulty, backlinks, page audits.",
+  "repository": {
+    "url": "https://github.com/hanshengcc/callai-seo-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://callaiapi.com/en/integrations/seo-mcp",
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.callaiapi.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer followed by your CallAI API key (create one at https://callaiapi.com/portal?tab=keys)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

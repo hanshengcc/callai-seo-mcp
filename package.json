@@ -1,0 +1,74 @@
+{
+  "name": "dsh-callai-seo",
+  "version": "0.1.0",
+  "description": "Live SEO data in DeepSeek Harness: Google/Bing SERP, keyword volume and difficulty, competitor gaps, backlinks and on-page audits via the CallAI MCP server. Pay as you go.",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "mcp",
+    "seo",
+    "serp",
+    "keyword-research",
+    "backlinks",
+    "dataforseo",
+    "geo"
+  ],
+  "homepage": "https://callaiapi.com/en/integrations/seo-mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanshengcc/callai-seo-mcp.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "skills",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "dsh": ">=0.2.0-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "catalog": {
+      "category": "integration",
+      "summary": {
+        "en": "Live SEO data for your agent: Google/Bing SERP, keyword difficulty, competitor gaps, backlinks, page audits. Pay as you go.",
+        "zh": "给 Agent 接上实时 SEO 数据：Google/Bing 搜索结果、关键词难度、竞品差距、外链与页面体检，按量计费。"
+      },
+      "capabilities": [
+        "mcp-client",
+        "skills",
+        "tools",
+        "credentials"
+      ]
+    }
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.4",
+    "@deepseek-ai/dsh-mcp-client": ">=0.2.0-rc.2"
+  },
+  "bugs": {
+    "url": "https://github.com/hanshengcc/callai-seo-mcp/issues"
+  },
+  "mcpName": "com.callaiapi/seo"
+}
