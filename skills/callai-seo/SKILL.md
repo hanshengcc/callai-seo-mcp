@@ -11,15 +11,15 @@ The `mcp__callai__*` tools return live search data. Every call is billed to the 
 
 | Tool | Use it for | Approx. cost |
 |---|---|---|
-| `google_serp` | Who ranks for a query; the AI Overview text and the sites it cites | $0.002 per 10 results |
-| `bing_serp` | Same for Bing (feeds Copilot and ChatGPT search) | $0.002 per 10 results |
-| `keyword_overview` | Volume, CPC, difficulty (0–100), intent for up to 100 keywords | $0.01 + $0.0001/keyword |
-| `keyword_ideas` | Long-tail keywords containing a seed; `max_difficulty` filters | $0.01 + $0.0001/row |
-| `ranked_keywords` | Keywords a domain ranks for, by traffic | $0.01 + $0.0001/row |
-| `domain_overview` | A domain's estimated organic traffic and position spread | $0.01 |
-| `keyword_gap` | Keywords a competitor ranks for that the user's domain does not | $0.01 + $0.0001/row |
-| `backlinks_summary` | Domain rank, backlinks, referring domains, spam score | $0.02 |
-| `referring_domains` | The domains linking to a site | $0.02 + small per row |
+| `google_serp` | Who ranks for a query; the AI Overview text and the sites it cites | $0.0024 per 10 results |
+| `bing_serp` | Same for Bing (feeds Copilot and ChatGPT search) | $0.0024 per 10 results |
+| `keyword_overview` | Volume, CPC, difficulty (0–100), intent for up to 100 keywords | $0.012 + $0.00012/keyword |
+| `keyword_ideas` | Long-tail keywords containing a seed; `max_difficulty` filters | $0.012 + $0.00012/row |
+| `ranked_keywords` | Keywords a domain ranks for, by traffic | $0.012 + $0.00012/row |
+| `domain_overview` | A domain's estimated organic traffic and position spread | $0.015 |
+| `keyword_gap` | Keywords a competitor ranks for that the user's domain does not | $0.012 + $0.00012/row |
+| `backlinks_summary` | Domain rank, backlinks, referring domains, spam score | $0.029 |
+| `referring_domains` | The domains linking to a site | $0.024 + small per row |
 | `page_audit` | Title, meta, headings, canonical, word count, timing and checks for one URL | $0.0002 |
 | `dataforseo_request` | Any other DataForSEO v3 endpoint (Maps, YouTube, Amazon, Trends, WHOIS…) | endpoint price |
 

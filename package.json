@@ -1,18 +1,21 @@
 {
-  "name": "dsh-callai-seo",
-  "version": "0.1.1",
-  "description": "Live SEO data in DeepSeek Harness: Google/Bing SERP, keyword volume and difficulty, competitor gaps, backlinks and on-page audits via the CallAI MCP server. Pay as you go.",
+  "name": "callai",
+  "version": "0.1.0",
+  "description": "CallAI for DeepSeek Harness: live SEO data for your agent — Google/Bing SERP with AI Overview sources, keyword volume and difficulty, competitor gaps, backlinks and page audits. Pay as you go.",
   "keywords": [
     "dsh-plugin",
     "deepseek-harness",
     "dsh",
+    "callai",
     "mcp",
+    "mcp-server",
     "seo",
     "serp",
     "keyword-research",
     "backlinks",
     "dataforseo",
-    "geo"
+    "geo",
+    "ai-overview"
   ],
   "homepage": "https://callaiapi.com/en/integrations/seo-mcp",
   "repository": {
@@ -37,6 +40,7 @@
     "skills",
     "README.md",
     "README.zh.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "engines": {
