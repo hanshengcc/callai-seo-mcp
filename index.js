@@ -1,6 +1,6 @@
 /**
  * CallAI SEO for DeepSeek Harness: connects the CallAI SEO MCP server and bundles the `callai-seo` skill.
- * @module callai
+ * @module @callai/seo
  */
 
 import { readFile } from 'node:fs/promises'
