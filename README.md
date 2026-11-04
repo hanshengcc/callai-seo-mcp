@@ -177,7 +177,6 @@ In dsh the tools appear as `mcp__callai__<name>`; other clients show `<name>`. E
 | `referring_domains` | `target`* domain, `limit` 1–200 (default 50) | Linking domains, strongest first: rank, backlinks, spam score, first seen |
 | `page_audit` | `url`* | Status code, title, meta description, canonical, headings, word count, link and image counts, timing, on-page score, all checks |
 | `dataforseo_request` | `path`*, `method` POST/GET, `body` | Any other [DataForSEO v3 endpoint](https://docs.dataforseo.com/v3/) — Google Maps, YouTube, Amazon keywords, Google Trends, LLM mentions, WHOIS, technologies, async `task_post`/`task_get` |
-
 | `domain_check_start` | `domains`* (up to 100), `dry_run`, `rules` | Starts a check of archive history, Baidu index and backlinks. Charged per domain, about $0.02; `dry_run` returns the cost without charging |
 | `domain_check_results` | `check_id`*, `verdict`, `limit`, `after` | Progress and per-domain verdict, reason and facts. Free to read |
 
