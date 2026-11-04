@@ -12,7 +12,7 @@
 - **DeepSeek Harness（dsh）插件**：就是这个 npm 包 `@callaiapi/seo`。装好后 Agent 会获得这些工具，以及一个 `callai-seo` skill，教它怎么做关键词调研、竞品分析、GEO 检查和页面体检。
 - **远程 MCP 服务器**：`https://api.callaiapi.com/mcp`，可用于 Claude Code、Cursor、VS Code、Cline、Windsurf 等任何 MCP 客户端，无需安装。
 
-数据来自 [DataForSEO](https://dataforseo.com/)。按次从你的青柠AI 余额扣费：$1 起充，无月费，余额不过期。每次工具结果都会写明本次花费。
+数据来自 [DataForSEO](https://dataforseo.com/)。付费工具按次从你的青柠AI 余额扣费：$1 起充，无月费，余额不过期，每次结果都会写明本次花费。7 个免费工具只需要 API 密钥。查看工具列表不需要密钥。
 
 ---
 
@@ -74,7 +74,7 @@ CALLAI_API_KEY=sk-live-你的密钥
 
 ### 确认装好了
 
-开一个会话问「你有哪些 mcp__callai 开头的工具？」，应该列出 11 个；再问「帮我体检 https://example.com」，应该返回真实数据和一行 `billed_usd`。
+开一个会话问「你有哪些 mcp__callai 开头的工具？」，应该列出 20 个；再问「帮我体检 https://example.com」，应该返回真实数据和一行 `billed_usd`。
 
 ### 插件配置项
 
@@ -177,6 +177,23 @@ claude mcp add --transport http callai https://api.callaiapi.com/mcp \
 | `referring_domains` | `target`* 域名、`limit` 1–200（默认 50） | 链接到该站的域名，强的在前：评分、外链数、垃圾分、首次发现时间 |
 | `page_audit` | `url`* | 状态码、标题、描述、canonical、各级标题、字数、链接与图片数、加载时间、页面得分、全部检查项 |
 | `dataforseo_request` | `path`*、`method` POST/GET、`body` | 其他任意 [DataForSEO v3 接口](https://docs.dataforseo.com/v3/)：Google 地图、YouTube、亚马逊关键词、Google Trends、大模型提及、WHOIS、网站技术栈、异步 `task_post`/`task_get` 等 |
+
+| `domain_check_start` | `domains`*（最多 100 个）、`dry_run`、`rules` | 发起域名体检：历史存档、百度收录和外链。按域名计费，约 $0.02 一个；`dry_run` 只返回报价、不扣费 |
+| `domain_check_results` | `check_id`*、`verdict`、`limit`、`after` | 进度及每个域名的结论、原因和数据。读取免费 |
+
+### 免费工具
+
+只需要 API 密钥，不需要余额，每账号每天 200 个单位额度。`keyword_suggestions` 的 `seed` 模式算 1 个单位，`questions` 算 3 个，`az` 算 5 个；其他工具都算 1 个。
+
+| 工具 | 参数 | 返回 |
+|---|---|---|
+| `keyword_suggestions` | `keyword`*、`engines`、`market`、`mode` seed/questions/az | Google、Bing、YouTube、亚马逊、百度、DuckDuckGo、Yahoo、Yandex 的下拉词，不含搜索量 |
+| `check_robots` | `url`* | robots.txt 的状态码和内容 |
+| `check_sitemap` | `url`* | 从 robots.txt 或 /sitemap.xml 找到的站点地图：状态码、网址数、样例 |
+| `page_meta` | `url`*、`fetch_as` bot/googlebot | 状态码、最终网址、标题、描述、canonical、robots、X-Robots-Tag、hreflang、H1，取自原始 HTML |
+| `redirect_chain` | `url`* | 每一跳跳转的状态码和目标，最多 5 跳 |
+| `dns_lookup` | `domain`* | A、AAAA、CNAME、MX、NS、TXT 记录 |
+| `email_auth_check` | `domain`*、`dkim_selector` | MX、SPF、DKIM、DMARC、MTA-STS 记录，以及需要修复的问题 |
 
 域名可以写成 `example.com`、`www.example.com` 或完整网址。
 

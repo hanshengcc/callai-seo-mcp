@@ -12,7 +12,7 @@ It works two ways:
 - **DeepSeek Harness (dsh) plugin** — this npm package, `@callaiapi/seo`. Installs the tools plus a `callai-seo` skill that teaches the agent how to do keyword research, competitor analysis, GEO checks and audits.
 - **Remote MCP server** — `https://api.callaiapi.com/mcp`, for Claude Code, Cursor, VS Code, Cline, Windsurf and any other MCP client. Nothing to install.
 
-Data comes from [DataForSEO](https://dataforseo.com/). You pay per call from your CallAI balance: top up from $1, no subscription, balance never expires. Every tool result states what that call cost.
+Data comes from [DataForSEO](https://dataforseo.com/). Paid tools bill your CallAI balance per call: top up from $1, no subscription, balance never expires. Every result states what that call cost. Seven free tools need only an API key. Anyone can list the tools without a key.
 
 ---
 
@@ -74,7 +74,7 @@ Saving the credential through dsh reconnects automatically; changes to the patch
 
 ### Check it works
 
-Start a session and ask *"Which mcp__callai tools do you have?"* — the agent should list 11 tools, and *"Audit https://example.com"* should come back with real data and a `billed_usd` line.
+Start a session and ask *"Which mcp__callai tools do you have?"* — the agent should list 20 tools, and *"Audit https://example.com"* should come back with real data and a `billed_usd` line.
 
 ### Plugin settings
 
@@ -177,6 +177,23 @@ In dsh the tools appear as `mcp__callai__<name>`; other clients show `<name>`. E
 | `referring_domains` | `target`* domain, `limit` 1–200 (default 50) | Linking domains, strongest first: rank, backlinks, spam score, first seen |
 | `page_audit` | `url`* | Status code, title, meta description, canonical, headings, word count, link and image counts, timing, on-page score, all checks |
 | `dataforseo_request` | `path`*, `method` POST/GET, `body` | Any other [DataForSEO v3 endpoint](https://docs.dataforseo.com/v3/) — Google Maps, YouTube, Amazon keywords, Google Trends, LLM mentions, WHOIS, technologies, async `task_post`/`task_get` |
+
+| `domain_check_start` | `domains`* (up to 100), `dry_run`, `rules` | Starts a check of archive history, Baidu index and backlinks. Charged per domain, about $0.02; `dry_run` returns the cost without charging |
+| `domain_check_results` | `check_id`*, `verdict`, `limit`, `after` | Progress and per-domain verdict, reason and facts. Free to read |
+
+### Free tools
+
+These need an API key but no balance, within a daily allowance of 200 units per account. `keyword_suggestions` counts 1 unit in `seed` mode, 3 in `questions` and 5 in `az`; the others count 1.
+
+| Tool | Parameters | Returns |
+|---|---|---|
+| `keyword_suggestions` | `keyword`*, `engines`, `market`, `mode` seed/questions/az | Autocomplete suggestions from Google, Bing, YouTube, Amazon, Baidu, DuckDuckGo, Yahoo and Yandex. No search volume |
+| `check_robots` | `url`* | Status and contents of robots.txt |
+| `check_sitemap` | `url`* | Sitemaps found through robots.txt or /sitemap.xml: status, URL count, sample |
+| `page_meta` | `url`*, `fetch_as` bot/googlebot | Status, final URL, title, description, canonical, robots, X-Robots-Tag, hreflang, H1s, from raw HTML |
+| `redirect_chain` | `url`* | Status and target of every redirect, up to 5 |
+| `dns_lookup` | `domain`* | A, AAAA, CNAME, MX, NS and TXT records |
+| `email_auth_check` | `domain`*, `dkim_selector` | MX, SPF, DKIM, DMARC and MTA-STS records, with an audit of what to fix |
 
 Domains can be given as `example.com`, `www.example.com` or a full URL.
 
